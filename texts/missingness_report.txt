@@ -1,0 +1,109 @@
+Feature: age
+- Missing % (overall): 2.26%
+- Missing % (CKD): 3.20%
+- Missing % (non-CKD): 0.67%
+
+Feature: blood_pressure
+- Missing % (overall): 3.01%
+- Missing % (CKD): 4.00%
+- Missing % (non-CKD): 1.34%
+
+Feature: specific_gravity
+- Missing % (overall): 11.78%
+- Missing % (CKD): 16.80%
+- Missing % (non-CKD): 3.36%
+
+Feature: albumin
+- Missing % (overall): 11.53%
+- Missing % (CKD): 16.40%
+- Missing % (non-CKD): 3.36%
+
+Feature: sugar
+- Missing % (overall): 12.28%
+- Missing % (CKD): 17.60%
+- Missing % (non-CKD): 3.36%
+
+Feature: blood_glucose_random
+- Missing % (overall): 11.03%
+- Missing % (CKD): 15.20%
+- Missing % (non-CKD): 4.03%
+
+Feature: blood_urea
+- Missing % (overall): 4.76%
+- Missing % (CKD): 5.20%
+- Missing % (non-CKD): 4.03%
+
+Feature: serum_creatinine
+- Missing % (overall): 4.26%
+- Missing % (CKD): 4.80%
+- Missing % (non-CKD): 3.36%
+
+Feature: sodium
+- Missing % (overall): 21.80%
+- Missing % (CKD): 32.80%
+- Missing % (non-CKD): 3.36%
+
+Feature: potassium
+- Missing % (overall): 22.06%
+- Missing % (CKD): 33.20%
+- Missing % (non-CKD): 3.36%
+
+Feature: hemoglobin
+- Missing % (overall): 13.03%
+- Missing % (CKD): 18.40%
+- Missing % (non-CKD): 4.03%
+
+Feature: packed_cell_volume
+- Missing % (overall): 17.79%
+- Missing % (CKD): 26.80%
+- Missing % (non-CKD): 2.68%
+
+Feature: white_blood_cell_count
+- Missing % (overall): 26.57%
+- Missing % (CKD): 39.60%
+- Missing % (non-CKD): 4.70%
+
+Feature: red_blood_cell_count
+- Missing % (overall): 32.83%
+- Missing % (CKD): 49.60%
+- Missing % (non-CKD): 4.70%
+
+Feature: egfr_cr
+- Missing % (overall): 6.52%
+- Missing % (CKD): 8.00%
+- Missing % (non-CKD): 4.03%
+
+Feature: urea_creatinine_ratio
+- Missing % (overall): 5.01%
+- Missing % (CKD): 5.60%
+- Missing % (non-CKD): 4.03%
+
+Feature: egfr_cys
+- Missing % (overall): 100.00%
+- Missing % (CKD): 100.00%
+- Missing % (non-CKD): 100.00%
+
+Feature: egfr_cr_cys
+- Missing % (overall): 100.00%
+- Missing % (CKD): 100.00%
+- Missing % (non-CKD): 100.00%
+
+Feature: egfr_discordance
+- Missing % (overall): 100.00%
+- Missing % (CKD): 100.00%
+- Missing % (non-CKD): 100.00%
+
+Feature: hba1c
+- Missing % (overall): 100.00%
+- Missing % (CKD): 100.00%
+- Missing % (non-CKD): 100.00%
+
+Feature: cystatin_c
+- Missing % (overall): 100.00%
+- Missing % (CKD): 100.00%
+- Missing % (non-CKD): 100.00%
+
+Feature: crp
+- Missing % (overall): 100.00%
+- Missing % (CKD): 100.00%
+- Missing % (non-CKD): 100.00%

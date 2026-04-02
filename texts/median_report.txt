@@ -1,0 +1,109 @@
+Feature: age
+- Median (CKD): 59
+- Median (non-CKD): 46
+- Direction: CKD > non-CKD
+
+Feature: blood_pressure
+- Median (CKD): 80
+- Median (non-CKD): 70
+- Direction: CKD > non-CKD
+
+Feature: specific_gravity
+- Median (CKD): 1.015
+- Median (non-CKD): 1.02
+- Direction: CKD < non-CKD
+
+Feature: albumin
+- Median (CKD): 2
+- Median (non-CKD): 0
+- Direction: CKD > non-CKD
+
+Feature: sugar
+- Median (CKD): 0
+- Median (non-CKD): 0
+- Direction: equal
+
+Feature: blood_glucose_random
+- Median (CKD): 143.5
+- Median (non-CKD): 108
+- Direction: CKD > non-CKD
+
+Feature: blood_urea
+- Median (CKD): 53
+- Median (non-CKD): 33
+- Direction: CKD > non-CKD
+
+Feature: serum_creatinine
+- Median (CKD): 2.25
+- Median (non-CKD): 0.9
+- Direction: CKD > non-CKD
+
+Feature: sodium
+- Median (CKD): 136
+- Median (non-CKD): 141
+- Direction: CKD < non-CKD
+
+Feature: potassium
+- Median (CKD): 4.3
+- Median (non-CKD): 4.5
+- Direction: CKD < non-CKD
+
+Feature: hemoglobin
+- Median (CKD): 10.9
+- Median (non-CKD): 15
+- Direction: CKD < non-CKD
+
+Feature: packed_cell_volume
+- Median (CKD): 33
+- Median (non-CKD): 46
+- Direction: CKD < non-CKD
+
+Feature: white_blood_cell_count
+- Median (CKD): 8800
+- Median (non-CKD): 7500
+- Direction: CKD > non-CKD
+
+Feature: red_blood_cell_count
+- Median (CKD): 3.9
+- Median (non-CKD): 5.3
+- Direction: CKD < non-CKD
+
+Feature: egfr_cr
+- Median (CKD): 32.75
+- Median (non-CKD): 104.8
+- Direction: CKD < non-CKD
+
+Feature: urea_creatinine_ratio
+- Median (CKD): 22.22
+- Median (non-CKD): 38.33
+- Direction: CKD < non-CKD
+
+Feature: egfr_cys
+- Median (CKD): NA
+- Median (non-CKD): NA
+- Direction: NA
+
+Feature: egfr_cr_cys
+- Median (CKD): NA
+- Median (non-CKD): NA
+- Direction: NA
+
+Feature: egfr_discordance
+- Median (CKD): NA
+- Median (non-CKD): NA
+- Direction: NA
+
+Feature: hba1c
+- Median (CKD): NA
+- Median (non-CKD): NA
+- Direction: NA
+
+Feature: cystatin_c
+- Median (CKD): NA
+- Median (non-CKD): NA
+- Direction: NA
+
+Feature: crp
+- Median (CKD): NA
+- Median (non-CKD): NA
+- Direction: NA

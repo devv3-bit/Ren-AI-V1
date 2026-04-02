@@ -1,0 +1,31 @@
+.venv/
+__pycache__/
+.DS_Store
+data/processed/
+data/interim/
+.ipynb_checkpoints/
+
+# Archives & compressed files
+*.rar
+*.zip
+*.tar.gz
+*.7z
+
+# LaTeX / whitepaper source
+*.tex
+whitepaper/
+
+# Raw rough output figures
+Outpurs/
+
+# Media directory
+media/
+
+# Markdown files (keep only generated docs in repo)
+*.md
+
+# Extracted dataset folder (duplicate of data/raw)
+Chronic_Kidney_Disease/
+
+# Egg info
+*.egg-info/
