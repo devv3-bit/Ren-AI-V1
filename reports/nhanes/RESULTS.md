@@ -17,6 +17,7 @@ was frozen and written down (`run_log.md`, "Decision record").
 | **Early-subgroup ROC-AUC** (eGFR >= 60) | **0.751 [0.733, 0.768]** | same, restricted to the 7,420 test participants whose CKD can only be albuminuria (KDIGO G1-G2 A2-A3) |
 | **External ROC-AUC**, 399 UCI hospital patients, first look (v2) | **0.641 [0.587, 0.701]** | UCI-compatible logistic model (14 shared features) trained on NHANES only, applied unchanged |
 | **External ROC-AUC**, same 399 patients, second look (v3, disclosed) | **0.950 [0.931, 0.967]** | gradient-boosting transfer model on the same 14 features after a pre-specified fix of the diagnosed preprocessing flaw; selected by NHANES CV only (Section 8b) |
+| CKD cases with normal eGFR (>= 60) | **3,823 of 6,768 = 56.5%** | KDIGO G1-G2 A2-A3: CKD by urine albumin only; the standard eGFR < 60 screen alone would miss them (eGFR-alone AUC 0.556 in this subgroup) |
 | Blood tests / engineered scores used | 17 / 2 | analytes from serum chemistry, CBC and HbA1c; eGFR (CKD-EPI 2021) and BUN:creatinine ratio |
 
 95% CIs are percentile bootstraps (1,000 resamples, seed 42).
@@ -61,8 +62,10 @@ using each participant's recorded sex.
 | train 2005-2016 | 31,584 | 5,301 | 16.8% | 29,257 | 2,974 | 10.2% |
 | test 2017-2020 | 8,038 | 1,467 | 18.3% | 7,420 | 849 | 11.4% |
 
-Label composition (all): eGFR < 60 only 1,812; ACR >= 30 only 3,823; both 1,133. More than
-half of the CKD cases are albuminuria-only, which no blood test measures directly.
+Label composition (all): eGFR < 60 only 1,812; ACR >= 30 only 3,823; both 1,133. So **56.5% of
+CKD cases (3,823 of 6,768; train 56.1%, test 57.9%) have eGFR >= 60** and are CKD only by
+albuminuria: the standard eGFR < 60 screen alone misses them, and no blood test measures
+albuminuria directly.
 
 ## 4. Features (Step 6)
 

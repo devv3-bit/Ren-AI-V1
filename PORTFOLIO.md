@@ -15,6 +15,7 @@ Every run, including the ones that did worse: [reports/nhanes/run_log.md](report
 | Cohort | 39,622 US adults, CDC NHANES 2005-Mar 2020 (7 cycles, 56 files) |
 | Label | KDIGO single visit: eGFR < 60 OR urine ACR >= 30 mg/g (prevalence 17.1%) |
 | Features | 17 routine blood tests + age, sex, BP, BMI, diabetes + 2 derived kidney scores |
+| CKD cases missed by eGFR < 60 alone | **56.5%** (3,823 of 6,768): normal eGFR, CKD only by urine albumin |
 | Held-out AUC, 2017-Mar 2020 (n = 8,038) | **0.856** [0.844, 0.868], gradient boosting |
 | Early-stage AUC (eGFR >= 60, albuminuria-only CKD) | **0.751** [0.733, 0.768] |
 | External, 399 hospital patients | **0.64** first look, **0.95** after a pre-specified fix (second look, disclosed) |
@@ -89,9 +90,10 @@ behave on real people. That question became v2.
 | 3 | Serum creatinine AND urine ACR measured | 5,589 | **39,622** |
 
 **Label.** eGFR from CKD-EPI 2021 with the recorded sex (vectorised, tested against the scalar
-v1 implementation to 1e-12), CKD if eGFR < 60 or ACR >= 30 mg/g. More than half of the CKD
-cases (3,823 of 6,768) are albuminuria-only, which no blood test measures directly; this is the
-early subgroup the model is judged on separately.
+v1 implementation to 1e-12), CKD if eGFR < 60 or ACR >= 30 mg/g. 56.5% of the CKD cases
+(3,823 of 6,768) have normal eGFR and are CKD only by albuminuria, which no blood test measures
+directly: the standard eGFR < 60 screen misses them. This is the early subgroup the model is
+judged on separately.
 
 **Features.** 17 blood analytes (serum creatinine, BUN, glucose, sodium, potassium, chloride,
 bicarbonate, albumin, uric acid, calcium, phosphorus, hemoglobin, hematocrit, RBC, WBC,

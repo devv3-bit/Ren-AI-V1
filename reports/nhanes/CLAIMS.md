@@ -18,6 +18,21 @@ Built ML model flagging early CKD from 17 routine blood tests + 2 self-built kid
 | X = 0.86 | held-out AUC | ROC-AUC of the final gradient-boosting model on the 8,038 participants of the 2017-Mar 2020 cycle, never used for training or tuning; 95% CI [0.84, 0.87] |
 | Y = 0.95 | external AUC | ROC-AUC of the v3 transfer model (hgb, 14 shared features, trained on NHANES only, selected by NHANES CV) on the 399 UCI hospital patients, eGFR computed as male; 95% CI [0.93, 0.97]. This is a disclosed SECOND look at UCI; the first look (v2 harmonised logistic) was 0.64 [0.59, 0.70] |
 
+## Your line, verified claim by claim
+
+```
+Built CKD ML pipeline on 39K adults; engineered eGFR + 17 biomarkers; achieved 0.86 AUC; showed eGFR missed 56% of CKD; tested on 399 hospital cases
+```
+148 characters
+
+| claim | what backs it | status |
+|---|---|---|
+| "Built CKD ML pipeline on 39K adults" | 39,622 NHANES adults after the four cohort filters (`cohort_flow.md`) | supported |
+| "engineered eGFR + 17 biomarkers" | eGFR computed as a feature with the CKD-EPI 2021 equation (`src/nhanes/egfr.py`); 17 blood analytes as features (`src/nhanes/constants.py::BLOOD_TEST_FEATURES`) | supported; eGFR is a published equation you implemented, so "engineered" means feature engineering, not a new score |
+| "achieved 0.86 AUC" | 0.856 [0.844, 0.868] on the held-out 2017-Mar 2020 cycle, model frozen before the test (`test_metrics.json`) | supported |
+| "showed eGFR missed 56% of CKD" | 3,823 of 6,768 CKD cases (56.5%) had eGFR >= 60 and were CKD only by urine albumin (KDIGO G1-G2 A2-A3); eGFR alone scores AUC 0.556 in that subgroup (`cohort_summary.json`, `test_metrics.json`) | supported; it describes the standard eGFR < 60 screen, not your model |
+| "tested on 399 hospital cases" | external validation on the 399 UCI patients: first look 0.64, second look after a pre-specified fix 0.95 (`external_metrics.json`, `external_metrics_v3.json`) | supported; if you add a number, both must be cited together |
+
 ## Wording the results do not fully support
 
 1. **"early CKD" next to 0.86.** The 0.86 is for all-stage CKD (eGFR < 60 OR ACR >= 30) and eGFR is
