@@ -29,3 +29,9 @@ Chronic_Kidney_Disease/
 
 # Egg info
 *.egg-info/
+
+# NHANES external data (public; re-download with scripts/download_nhanes.sh)
+data/external/
+
+# Keep the v2 NHANES reports despite the global *.md rule above
+!reports/nhanes/**/*.md
