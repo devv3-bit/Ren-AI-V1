@@ -1,0 +1,305 @@
+{
+  "flow": [
+    {
+      "step": 0,
+      "description": "All participants in the 7 NHANES cycles (DEMO rows)",
+      "n_remaining": 76496,
+      "n_excluded": 0
+    },
+    {
+      "step": 1,
+      "description": "Age >= 18 years",
+      "n_remaining": 45980,
+      "n_excluded": 30516
+    },
+    {
+      "step": 2,
+      "description": "Not pregnant at exam (RIDEXPRG = 1 excluded)",
+      "n_remaining": 45211,
+      "n_excluded": 769
+    },
+    {
+      "step": 3,
+      "description": "Non-missing serum creatinine AND non-missing urine ACR",
+      "n_remaining": 39622,
+      "n_excluded": 5589
+    }
+  ],
+  "final_n": 39622,
+  "overall": {
+    "n": 39622,
+    "n_ckd": 6768,
+    "prevalence": 0.1708141941345717,
+    "n_egfr_low": 2945,
+    "n_albuminuria": 4956,
+    "n_both": 1133,
+    "n_early_subgroup": 36677,
+    "n_ckd_early_subgroup": 3823,
+    "prevalence_early_subgroup": 0.1042342612536467
+  },
+  "by_split": {
+    "train": {
+      "n": 31584,
+      "n_ckd": 5301,
+      "prevalence": 0.16783814589665655,
+      "n_egfr_low": 2327,
+      "n_albuminuria": 3860,
+      "n_both": 886,
+      "n_early_subgroup": 29257,
+      "n_ckd_early_subgroup": 2974,
+      "prevalence_early_subgroup": 0.10165088696722152
+    },
+    "test": {
+      "n": 8038,
+      "n_ckd": 1467,
+      "prevalence": 0.18250808658870366,
+      "n_egfr_low": 618,
+      "n_albuminuria": 1096,
+      "n_both": 247,
+      "n_early_subgroup": 7420,
+      "n_ckd_early_subgroup": 849,
+      "prevalence_early_subgroup": 0.11442048517520216
+    }
+  },
+  "by_cycle": [
+    {
+      "cycle": "D",
+      "n": 4569,
+      "n_ckd": 787,
+      "prevalence": 0.17224775662070474,
+      "n_egfr_low": 362,
+      "n_albuminuria": 562,
+      "n_both": 137,
+      "n_early_subgroup": 4207,
+      "n_ckd_early_subgroup": 425,
+      "prevalence_early_subgroup": 0.10102210601378654
+    },
+    {
+      "cycle": "E",
+      "n": 5405,
+      "n_ckd": 980,
+      "prevalence": 0.18131359851988899,
+      "n_egfr_low": 399,
+      "n_albuminuria": 740,
+      "n_both": 159,
+      "n_early_subgroup": 5006,
+      "n_ckd_early_subgroup": 581,
+      "prevalence_early_subgroup": 0.11606072712744707
+    },
+    {
+      "cycle": "F",
+      "n": 5832,
+      "n_ckd": 908,
+      "prevalence": 0.15569272976680384,
+      "n_egfr_low": 427,
+      "n_albuminuria": 624,
+      "n_both": 143,
+      "n_early_subgroup": 5405,
+      "n_ckd_early_subgroup": 481,
+      "prevalence_early_subgroup": 0.08899167437557817
+    },
+    {
+      "cycle": "G",
+      "n": 5049,
+      "n_ckd": 858,
+      "prevalence": 0.16993464052287582,
+      "n_egfr_low": 379,
+      "n_albuminuria": 640,
+      "n_both": 161,
+      "n_early_subgroup": 4670,
+      "n_ckd_early_subgroup": 479,
+      "prevalence_early_subgroup": 0.1025695931477516
+    },
+    {
+      "cycle": "H",
+      "n": 5480,
+      "n_ckd": 907,
+      "prevalence": 0.16551094890510948,
+      "n_egfr_low": 403,
+      "n_albuminuria": 645,
+      "n_both": 141,
+      "n_early_subgroup": 5077,
+      "n_ckd_early_subgroup": 504,
+      "prevalence_early_subgroup": 0.0992712231632854
+    },
+    {
+      "cycle": "I",
+      "n": 5249,
+      "n_ckd": 861,
+      "prevalence": 0.16403124404648506,
+      "n_egfr_low": 357,
+      "n_albuminuria": 649,
+      "n_both": 145,
+      "n_early_subgroup": 4892,
+      "n_ckd_early_subgroup": 504,
+      "prevalence_early_subgroup": 0.10302534750613246
+    },
+    {
+      "cycle": "P",
+      "n": 8038,
+      "n_ckd": 1467,
+      "prevalence": 0.18250808658870366,
+      "n_egfr_low": 618,
+      "n_albuminuria": 1096,
+      "n_both": 247,
+      "n_early_subgroup": 7420,
+      "n_ckd_early_subgroup": 849,
+      "prevalence_early_subgroup": 0.11442048517520216
+    }
+  ],
+  "feature_inventory": {
+    "n_blood_tests": 17,
+    "blood_tests": [
+      "serum_creatinine",
+      "bun",
+      "blood_glucose_random",
+      "sodium",
+      "potassium",
+      "chloride",
+      "bicarbonate",
+      "serum_albumin",
+      "uric_acid",
+      "calcium",
+      "phosphorus",
+      "hemoglobin",
+      "packed_cell_volume",
+      "red_blood_cell_count",
+      "white_blood_cell_count",
+      "platelets",
+      "hba1c"
+    ],
+    "n_vitals_demographics": 6,
+    "vitals_demographics": [
+      "age",
+      "sex_male",
+      "sbp",
+      "blood_pressure",
+      "bmi",
+      "diabetes_mellitus"
+    ],
+    "n_engineered_scores": 2,
+    "engineered_scores": [
+      "egfr_cr",
+      "bun_creatinine_ratio"
+    ],
+    "n_model_features": 25,
+    "log_transformed": [
+      "serum_creatinine",
+      "bun",
+      "blood_glucose_random",
+      "bun_creatinine_ratio"
+    ],
+    "n_harmonized_uci_features": 14,
+    "harmonized_uci_features": [
+      "age",
+      "blood_pressure",
+      "blood_glucose_random",
+      "bun",
+      "serum_creatinine",
+      "egfr_cr",
+      "bun_creatinine_ratio",
+      "sodium",
+      "potassium",
+      "hemoglobin",
+      "packed_cell_volume",
+      "white_blood_cell_count",
+      "red_blood_cell_count",
+      "diabetes_mellitus"
+    ],
+    "never_features": [
+      "urine_albumin",
+      "urine_creatinine",
+      "acr"
+    ]
+  },
+  "plausibility_cohort": [
+    {
+      "column": "age",
+      "present": true,
+      "n_checked": 39622,
+      "hard_range": "(0, 120)",
+      "hard_violations": 0,
+      "soft_warnings": 0
+    },
+    {
+      "column": "blood_pressure",
+      "present": true,
+      "n_checked": 37818,
+      "hard_range": "(30, 300)",
+      "hard_violations": 271,
+      "soft_warnings": 0
+    },
+    {
+      "column": "serum_creatinine",
+      "present": true,
+      "n_checked": 39622,
+      "hard_range": "(0, 30)",
+      "hard_violations": 0,
+      "soft_warnings": 0
+    },
+    {
+      "column": "blood_urea",
+      "present": false,
+      "n_checked": 0,
+      "hard_range": "(0, 300)",
+      "hard_violations": 0,
+      "soft_warnings": 0
+    },
+    {
+      "column": "sodium",
+      "present": true,
+      "n_checked": 39618,
+      "hard_range": "(100, 200)",
+      "hard_violations": 1,
+      "soft_warnings": 0
+    },
+    {
+      "column": "potassium",
+      "present": true,
+      "n_checked": 39609,
+      "hard_range": "(1, 10)",
+      "hard_violations": 0,
+      "soft_warnings": 0
+    },
+    {
+      "column": "hemoglobin",
+      "present": true,
+      "n_checked": 39539,
+      "hard_range": "(1, 25)",
+      "hard_violations": 0,
+      "soft_warnings": 0
+    },
+    {
+      "column": "blood_glucose_random",
+      "present": true,
+      "n_checked": 39620,
+      "hard_range": "(20, 1000)",
+      "hard_violations": 1,
+      "soft_warnings": 0
+    },
+    {
+      "column": "packed_cell_volume",
+      "present": true,
+      "n_checked": 39539,
+      "hard_range": "(0, 80)",
+      "hard_violations": 0,
+      "soft_warnings": 0
+    },
+    {
+      "column": "white_blood_cell_count",
+      "present": true,
+      "n_checked": 39539,
+      "hard_range": "(1000, 50000)",
+      "hard_violations": 10,
+      "soft_warnings": 0
+    },
+    {
+      "column": "red_blood_cell_count",
+      "present": true,
+      "n_checked": 39539,
+      "hard_range": "(0, 10)",
+      "hard_violations": 0,
+      "soft_warnings": 0
+    }
+  ]
+}
