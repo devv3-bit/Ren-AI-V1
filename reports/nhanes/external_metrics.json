@@ -1,0 +1,252 @@
+{
+  "evaluated_utc": "2026-10-08T07:58:03+00:00",
+  "model": "model_A_harmonized",
+  "family": "logistic",
+  "params": {
+    "C": 1.0
+  },
+  "features": [
+    "age",
+    "blood_pressure",
+    "blood_glucose_random",
+    "bun",
+    "serum_creatinine",
+    "egfr_cr",
+    "bun_creatinine_ratio",
+    "sodium",
+    "potassium",
+    "hemoglobin",
+    "packed_cell_volume",
+    "white_blood_cell_count",
+    "red_blood_cell_count",
+    "diabetes_mellitus"
+  ],
+  "threshold_from_nhanes_train_youden": 0.5882546192111258,
+  "nhanes_train_cv_auc": 0.8096434548605543,
+  "by_sex_assumption": {
+    "male": {
+      "roc_auc": {
+        "auc": 0.641476510067114,
+        "ci_low": 0.5867187943703062,
+        "ci_high": 0.7013176896154728,
+        "n": 399,
+        "n_pos": 250,
+        "n_boot_valid": 1000
+      },
+      "at_train_threshold": {
+        "threshold": 0.5882546192111258,
+        "tp": 159,
+        "fp": 20,
+        "fn": 91,
+        "tn": 129,
+        "sensitivity": 0.636,
+        "specificity": 0.8657718120805369,
+        "ppv": 0.888268156424581,
+        "npv": 0.5863636363636363,
+        "accuracy": 0.7218045112781954,
+        "flagged_fraction": 0.44862155388471175
+      },
+      "brier": 0.2816781404627419,
+      "prevalence": 0.6265664160401002,
+      "brier_reference_constant": 0.4444125681595605,
+      "at_threshold_0.5": {
+        "threshold": 0.5,
+        "tp": 161,
+        "fp": 41,
+        "fn": 89,
+        "tn": 108,
+        "sensitivity": 0.644,
+        "specificity": 0.7248322147651006,
+        "ppv": 0.7970297029702971,
+        "npv": 0.5482233502538071,
+        "accuracy": 0.6741854636591479,
+        "flagged_fraction": 0.506265664160401
+      },
+      "feature_availability": [
+        {
+          "feature": "age",
+          "n_nonmissing": 390,
+          "frac_missing": 0.022556390977443608
+        },
+        {
+          "feature": "blood_pressure",
+          "n_nonmissing": 387,
+          "frac_missing": 0.03007518796992481
+        },
+        {
+          "feature": "blood_glucose_random",
+          "n_nonmissing": 355,
+          "frac_missing": 0.11027568922305764
+        },
+        {
+          "feature": "bun",
+          "n_nonmissing": 380,
+          "frac_missing": 0.047619047619047616
+        },
+        {
+          "feature": "serum_creatinine",
+          "n_nonmissing": 382,
+          "frac_missing": 0.042606516290726815
+        },
+        {
+          "feature": "egfr_cr",
+          "n_nonmissing": 373,
+          "frac_missing": 0.06516290726817042
+        },
+        {
+          "feature": "bun_creatinine_ratio",
+          "n_nonmissing": 379,
+          "frac_missing": 0.05012531328320802
+        },
+        {
+          "feature": "sodium",
+          "n_nonmissing": 312,
+          "frac_missing": 0.21804511278195488
+        },
+        {
+          "feature": "potassium",
+          "n_nonmissing": 311,
+          "frac_missing": 0.22055137844611528
+        },
+        {
+          "feature": "hemoglobin",
+          "n_nonmissing": 347,
+          "frac_missing": 0.13032581453634084
+        },
+        {
+          "feature": "packed_cell_volume",
+          "n_nonmissing": 328,
+          "frac_missing": 0.17794486215538846
+        },
+        {
+          "feature": "white_blood_cell_count",
+          "n_nonmissing": 293,
+          "frac_missing": 0.2656641604010025
+        },
+        {
+          "feature": "red_blood_cell_count",
+          "n_nonmissing": 268,
+          "frac_missing": 0.3283208020050125
+        },
+        {
+          "feature": "diabetes_mellitus",
+          "n_nonmissing": 397,
+          "frac_missing": 0.005012531328320802
+        }
+      ]
+    },
+    "female": {
+      "roc_auc": {
+        "auc": 0.6424161073825504,
+        "ci_low": 0.5873992470038111,
+        "ci_high": 0.701809478350433,
+        "n": 399,
+        "n_pos": 250,
+        "n_boot_valid": 1000
+      },
+      "at_train_threshold": {
+        "threshold": 0.5882546192111258,
+        "tp": 161,
+        "fp": 41,
+        "fn": 89,
+        "tn": 108,
+        "sensitivity": 0.644,
+        "specificity": 0.7248322147651006,
+        "ppv": 0.7970297029702971,
+        "npv": 0.5482233502538071,
+        "accuracy": 0.6741854636591479,
+        "flagged_fraction": 0.506265664160401
+      },
+      "brier": 0.2999817387756529,
+      "prevalence": 0.6265664160401002,
+      "brier_reference_constant": 0.4444125681595605,
+      "at_threshold_0.5": {
+        "threshold": 0.5,
+        "tp": 162,
+        "fp": 57,
+        "fn": 88,
+        "tn": 92,
+        "sensitivity": 0.648,
+        "specificity": 0.6174496644295302,
+        "ppv": 0.7397260273972602,
+        "npv": 0.5111111111111111,
+        "accuracy": 0.6365914786967418,
+        "flagged_fraction": 0.5488721804511278
+      },
+      "feature_availability": [
+        {
+          "feature": "age",
+          "n_nonmissing": 390,
+          "frac_missing": 0.022556390977443608
+        },
+        {
+          "feature": "blood_pressure",
+          "n_nonmissing": 387,
+          "frac_missing": 0.03007518796992481
+        },
+        {
+          "feature": "blood_glucose_random",
+          "n_nonmissing": 355,
+          "frac_missing": 0.11027568922305764
+        },
+        {
+          "feature": "bun",
+          "n_nonmissing": 380,
+          "frac_missing": 0.047619047619047616
+        },
+        {
+          "feature": "serum_creatinine",
+          "n_nonmissing": 382,
+          "frac_missing": 0.042606516290726815
+        },
+        {
+          "feature": "egfr_cr",
+          "n_nonmissing": 373,
+          "frac_missing": 0.06516290726817042
+        },
+        {
+          "feature": "bun_creatinine_ratio",
+          "n_nonmissing": 379,
+          "frac_missing": 0.05012531328320802
+        },
+        {
+          "feature": "sodium",
+          "n_nonmissing": 312,
+          "frac_missing": 0.21804511278195488
+        },
+        {
+          "feature": "potassium",
+          "n_nonmissing": 311,
+          "frac_missing": 0.22055137844611528
+        },
+        {
+          "feature": "hemoglobin",
+          "n_nonmissing": 347,
+          "frac_missing": 0.13032581453634084
+        },
+        {
+          "feature": "packed_cell_volume",
+          "n_nonmissing": 328,
+          "frac_missing": 0.17794486215538846
+        },
+        {
+          "feature": "white_blood_cell_count",
+          "n_nonmissing": 293,
+          "frac_missing": 0.2656641604010025
+        },
+        {
+          "feature": "red_blood_cell_count",
+          "n_nonmissing": 268,
+          "frac_missing": 0.3283208020050125
+        },
+        {
+          "feature": "diabetes_mellitus",
+          "n_nonmissing": 397,
+          "frac_missing": 0.005012531328320802
+        }
+      ]
+    }
+  },
+  "n_uci": 399,
+  "uci_prevalence": 0.6265664160401002
+}

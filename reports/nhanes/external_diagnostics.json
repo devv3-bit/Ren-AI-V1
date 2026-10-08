@@ -1,0 +1,381 @@
+{
+  "evaluated_utc": "2026-10-08T08:01:05+00:00",
+  "status": "POST-HOC, exploratory. Not pre-registered. The pre-registered external result is in external_metrics.json.",
+  "model": "model_A_harmonized (frozen; eGFR as male)",
+  "single_feature_auc_uci": [
+    {
+      "feature": "egfr_cr",
+      "sign": -1,
+      "n": 373,
+      "auc": 0.9099878382487078
+    },
+    {
+      "feature": "serum_creatinine",
+      "sign": 1,
+      "n": 382,
+      "auc": 0.9224585667600373
+    },
+    {
+      "feature": "bun",
+      "sign": 1,
+      "n": 380,
+      "auc": 0.7525744297896197
+    },
+    {
+      "feature": "hemoglobin",
+      "sign": -1,
+      "n": 347,
+      "auc": 0.969079939668175
+    },
+    {
+      "feature": "packed_cell_volume",
+      "sign": -1,
+      "n": 328,
+      "auc": 0.9523271151309591
+    },
+    {
+      "feature": "blood_glucose_random",
+      "sign": 1,
+      "n": 355,
+      "auc": 0.7473281435545586
+    },
+    {
+      "feature": "bun_creatinine_ratio",
+      "sign": 1,
+      "n": 379,
+      "auc": 0.20746414602346805
+    }
+  ],
+  "frozen_model_on_uci_subsets": {
+    "all_rows": {
+      "auc": 0.641476510067114,
+      "ci_low": 0.5867187943703062,
+      "ci_high": 0.7013176896154728,
+      "n": 399,
+      "n_pos": 250,
+      "n_boot_valid": 1000,
+      "prevalence": 0.6265664160401002,
+      "median_prob_ckd": 0.9816864628574528,
+      "median_prob_not_ckd": 0.3310363839133761
+    },
+    "complete_cases_all_14_features": {
+      "auc": 0.9822528735632184,
+      "ci_low": 0.9553158454379886,
+      "ci_high": 0.9994565548870319,
+      "n": 212,
+      "n_pos": 87,
+      "n_boot_valid": 1000,
+      "prevalence": 0.41037735849056606,
+      "median_prob_ckd": 0.9999482200993721,
+      "median_prob_not_ckd": 0.33290059338193384
+    },
+    "potassium_and_sodium_observed": {
+      "auc": 0.936751497005988,
+      "ci_low": 0.8995244385657907,
+      "ci_high": 0.9705331604134089,
+      "n": 311,
+      "n_pos": 167,
+      "n_boot_valid": 1000,
+      "prevalence": 0.5369774919614148,
+      "median_prob_ckd": 0.9999089699920531,
+      "median_prob_not_ckd": 0.33394843029301746
+    },
+    "potassium_or_sodium_missing": {
+      "auc": 0.5855421686746988,
+      "ci_low": 0.12922366621067033,
+      "ci_high": 0.9303327987169205,
+      "n": 88,
+      "n_pos": 83,
+      "n_boot_valid": 996,
+      "prevalence": 0.9431818181818182,
+      "median_prob_ckd": 4.5339339014187195e-24,
+      "median_prob_not_ckd": 2.057114042120362e-26
+    }
+  },
+  "uci_missingness_by_class": {
+    "age": {
+      "missing_frac_ckd": 0.032,
+      "missing_frac_not_ckd": 0.006711409395973154
+    },
+    "blood_pressure": {
+      "missing_frac_ckd": 0.04,
+      "missing_frac_not_ckd": 0.013422818791946308
+    },
+    "blood_glucose_random": {
+      "missing_frac_ckd": 0.152,
+      "missing_frac_not_ckd": 0.040268456375838924
+    },
+    "bun": {
+      "missing_frac_ckd": 0.052,
+      "missing_frac_not_ckd": 0.040268456375838924
+    },
+    "serum_creatinine": {
+      "missing_frac_ckd": 0.048,
+      "missing_frac_not_ckd": 0.03355704697986577
+    },
+    "egfr_cr": {
+      "missing_frac_ckd": 0.08,
+      "missing_frac_not_ckd": 0.040268456375838924
+    },
+    "bun_creatinine_ratio": {
+      "missing_frac_ckd": 0.056,
+      "missing_frac_not_ckd": 0.040268456375838924
+    },
+    "sodium": {
+      "missing_frac_ckd": 0.328,
+      "missing_frac_not_ckd": 0.03355704697986577
+    },
+    "potassium": {
+      "missing_frac_ckd": 0.332,
+      "missing_frac_not_ckd": 0.03355704697986577
+    },
+    "hemoglobin": {
+      "missing_frac_ckd": 0.184,
+      "missing_frac_not_ckd": 0.040268456375838924
+    },
+    "packed_cell_volume": {
+      "missing_frac_ckd": 0.268,
+      "missing_frac_not_ckd": 0.026845637583892617
+    },
+    "white_blood_cell_count": {
+      "missing_frac_ckd": 0.396,
+      "missing_frac_not_ckd": 0.04697986577181208
+    },
+    "red_blood_cell_count": {
+      "missing_frac_ckd": 0.496,
+      "missing_frac_not_ckd": 0.04697986577181208
+    },
+    "diabetes_mellitus": {
+      "missing_frac_ckd": 0.0,
+      "missing_frac_not_ckd": 0.013422818791946308
+    }
+  },
+  "standardised_missing_indicator_effects": [
+    {
+      "feature": "blood_pressure",
+      "nhanes_train_missing_rate": 0.03406788247213779,
+      "z_value_when_missing": 5.3247685256075785,
+      "coef_per_sd": 0.029677608786635244,
+      "log_odds_shift_when_missing": 0.15802639718237027,
+      "uci_missing_rate": 0.03007518796992481
+    },
+    {
+      "feature": "bun",
+      "nhanes_train_missing_rate": 9.498480243161094e-05,
+      "z_value_when_missing": 102.60116958397694,
+      "coef_per_sd": 0.27115557550824804,
+      "log_odds_shift_when_missing": 27.82087918636262,
+      "uci_missing_rate": 0.047619047619047616
+    },
+    {
+      "feature": "bun_creatinine_ratio",
+      "nhanes_train_missing_rate": 9.498480243161094e-05,
+      "z_value_when_missing": 102.60116958397694,
+      "coef_per_sd": 0.27115557550824804,
+      "log_odds_shift_when_missing": 27.82087918636262,
+      "uci_missing_rate": 0.05012531328320802
+    },
+    {
+      "feature": "sodium",
+      "nhanes_train_missing_rate": 0.00012664640324214793,
+      "z_value_when_missing": 88.85381252371785,
+      "coef_per_sd": -0.0446980235969845,
+      "log_odds_shift_when_missing": -3.9715898088671775,
+      "uci_missing_rate": 0.21804511278195488
+    },
+    {
+      "feature": "potassium",
+      "nhanes_train_missing_rate": 0.00018996960486322188,
+      "z_value_when_missing": 72.54653678846427,
+      "coef_per_sd": -0.756326954510425,
+      "log_odds_shift_when_missing": -54.86890122949769,
+      "uci_missing_rate": 0.22055137844611528
+    },
+    {
+      "feature": "hemoglobin",
+      "nhanes_train_missing_rate": 0.0025012664640324217,
+      "z_value_when_missing": 19.969914079795892,
+      "coef_per_sd": 0.0002058369425262742,
+      "log_odds_shift_when_missing": 0.00411054605669758,
+      "uci_missing_rate": 0.13032581453634084
+    },
+    {
+      "feature": "packed_cell_volume",
+      "nhanes_train_missing_rate": 0.0025012664640324217,
+      "z_value_when_missing": 19.969914079795892,
+      "coef_per_sd": 0.0002058369425262742,
+      "log_odds_shift_when_missing": 0.00411054605669758,
+      "uci_missing_rate": 0.17794486215538846
+    },
+    {
+      "feature": "white_blood_cell_count",
+      "nhanes_train_missing_rate": 0.0025012664640324217,
+      "z_value_when_missing": 19.969914079795892,
+      "coef_per_sd": 0.0002058369425262742,
+      "log_odds_shift_when_missing": 0.00411054605669758,
+      "uci_missing_rate": 0.2656641604010025
+    },
+    {
+      "feature": "red_blood_cell_count",
+      "nhanes_train_missing_rate": 0.0025012664640324217,
+      "z_value_when_missing": 19.969914079795892,
+      "coef_per_sd": 0.0002058369425262742,
+      "log_odds_shift_when_missing": 0.00411054605669758,
+      "uci_missing_rate": 0.3283208020050125
+    },
+    {
+      "feature": "diabetes_mellitus",
+      "nhanes_train_missing_rate": 0.0007915400202634245,
+      "z_value_when_missing": 35.52970588113557,
+      "coef_per_sd": 0.026561429251363067,
+      "log_odds_shift_when_missing": 0.9437197690835207,
+      "uci_missing_rate": 0.005012531328320802
+    }
+  ],
+  "mean_log_odds_contribution_by_class": [
+    {
+      "term": "age",
+      "mean_not_ckd": -0.025514588750317726,
+      "mean_ckd": 0.11278330757786441,
+      "diff_ckd_minus_not": 0.13829789632818212
+    },
+    {
+      "term": "blood_pressure",
+      "mean_not_ckd": 0.014323251508051589,
+      "mean_ckd": 0.07534278871243297,
+      "diff_ckd_minus_not": 0.06101953720438138
+    },
+    {
+      "term": "blood_glucose_random",
+      "mean_not_ckd": 0.06915117084682079,
+      "mean_ckd": 0.36873324879645875,
+      "diff_ckd_minus_not": 0.299582077949638
+    },
+    {
+      "term": "bun",
+      "mean_not_ckd": -1.9878958626635117,
+      "mean_ckd": -10.537688809135188,
+      "diff_ckd_minus_not": -8.549792946471676
+    },
+    {
+      "term": "serum_creatinine",
+      "mean_not_ckd": -0.37180894978461765,
+      "mean_ckd": 23.79622123780619,
+      "diff_ckd_minus_not": 24.16803018759081
+    },
+    {
+      "term": "egfr_cr",
+      "mean_not_ckd": -0.1356149074258242,
+      "mean_ckd": 1.0375320641815924,
+      "diff_ckd_minus_not": 1.1731469716074165
+    },
+    {
+      "term": "bun_creatinine_ratio",
+      "mean_not_ckd": 2.513023952485499,
+      "mean_ckd": -5.320638833386695,
+      "diff_ckd_minus_not": -7.833662785872194
+    },
+    {
+      "term": "sodium",
+      "mean_not_ckd": -0.037379477010132715,
+      "mean_ckd": 0.05551721151540492,
+      "diff_ckd_minus_not": 0.09289668852553763
+    },
+    {
+      "term": "potassium",
+      "mean_not_ckd": 0.00043789269145706793,
+      "mean_ckd": 0.0007367351437067749,
+      "diff_ckd_minus_not": 0.00029884245224970693
+    },
+    {
+      "term": "hemoglobin",
+      "mean_not_ckd": -0.15561057438792206,
+      "mean_ckd": 0.4156918038762786,
+      "diff_ckd_minus_not": 0.5713023782642006
+    },
+    {
+      "term": "packed_cell_volume",
+      "mean_not_ckd": 0.03541046915326767,
+      "mean_ckd": -0.04782229543848007,
+      "diff_ckd_minus_not": -0.08323276459174775
+    },
+    {
+      "term": "white_blood_cell_count",
+      "mean_not_ckd": 0.03369769735710619,
+      "mean_ckd": 0.07685695592001714,
+      "diff_ckd_minus_not": 0.043159258562910946
+    },
+    {
+      "term": "red_blood_cell_count",
+      "mean_not_ckd": -0.10541419508930691,
+      "mean_ckd": 0.05903491145564226,
+      "diff_ckd_minus_not": 0.16444910654494918
+    },
+    {
+      "term": "diabetes_mellitus",
+      "mean_not_ckd": -0.07328524336416983,
+      "mean_ckd": 0.2695318748182192,
+      "diff_ckd_minus_not": 0.342817118182389
+    },
+    {
+      "term": "missingindicator_blood_pressure",
+      "mean_not_ckd": -0.003377530339638137,
+      "mean_ckd": 0.000970493830342498,
+      "diff_ckd_minus_not": 0.004348024169980635
+    },
+    {
+      "term": "missingindicator_bun",
+      "mean_not_ckd": 1.1177674700628464,
+      "mean_ckd": 1.4441803321613917,
+      "diff_ckd_minus_not": 0.32641286209854536
+    },
+    {
+      "term": "missingindicator_bun_creatinine_ratio",
+      "mean_not_ckd": 1.1177674700628464,
+      "mean_ckd": 1.5554744201538022,
+      "diff_ckd_minus_not": 0.43770695009095584
+    },
+    {
+      "term": "missingindicator_sodium",
+      "mean_not_ckd": -0.1327886554420689,
+      "mean_ckd": -1.302343406852252,
+      "diff_ckd_minus_not": -1.169554751410183
+    },
+    {
+      "term": "missingindicator_potassium",
+      "mean_not_ckd": -1.8311627380678128,
+      "mean_ckd": -18.20951103832409,
+      "diff_ckd_minus_not": -16.378348300256278
+    },
+    {
+      "term": "missingindicator_hemoglobin",
+      "mean_not_ckd": 0.00015563305330144273,
+      "mean_ckd": 0.0007479296748450209,
+      "diff_ckd_minus_not": 0.0005922966215435782
+    },
+    {
+      "term": "missingindicator_packed_cell_volume",
+      "mean_not_ckd": 0.00010031958472247576,
+      "mean_ckd": 0.0010940813612121962,
+      "diff_ckd_minus_not": 0.0009937617764897205
+    },
+    {
+      "term": "missingindicator_white_blood_cell_count",
+      "mean_not_ckd": 0.00018328978759092623,
+      "mean_ckd": 0.0016215505975812252,
+      "diff_ckd_minus_not": 0.001438260809990299
+    },
+    {
+      "term": "missingindicator_red_blood_cell_count",
+      "mean_not_ckd": 0.00018328978759092623,
+      "mean_ckd": 0.0020336359384945293,
+      "diff_ckd_minus_not": 0.001850346150903603
+    },
+    {
+      "term": "missingindicator_diabetes_mellitus",
+      "mean_not_ckd": 0.011929830423857589,
+      "mean_ckd": -0.0007475837075663999,
+      "diff_ckd_minus_not": -0.012677414131423988
+    }
+  ]
+}

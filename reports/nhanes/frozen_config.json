@@ -1,0 +1,243 @@
+{
+  "created_utc": "2026-10-08T07:54:10+00:00",
+  "seed": 42,
+  "sklearn_version": "1.8.0",
+  "cv": "StratifiedKFold(n_splits=5, shuffle=True, random_state=42) on train cycles only",
+  "selection_rule": "highest mean CV ROC-AUC among ['model_A_full', 'model_B_full']",
+  "final_model": "model_B_full",
+  "threshold_rule": "Youden's J on train out-of-fold predictions (never on test)",
+  "models": {
+    "model_A_full": {
+      "family": "logistic",
+      "params": {
+        "C": 1.0
+      },
+      "features": [
+        "serum_creatinine",
+        "bun",
+        "blood_glucose_random",
+        "sodium",
+        "potassium",
+        "chloride",
+        "bicarbonate",
+        "serum_albumin",
+        "uric_acid",
+        "calcium",
+        "phosphorus",
+        "hemoglobin",
+        "packed_cell_volume",
+        "red_blood_cell_count",
+        "white_blood_cell_count",
+        "platelets",
+        "hba1c",
+        "age",
+        "sex_male",
+        "sbp",
+        "blood_pressure",
+        "bmi",
+        "diabetes_mellitus",
+        "egfr_cr",
+        "bun_creatinine_ratio"
+      ],
+      "log_features": [
+        "serum_creatinine",
+        "bun",
+        "blood_glucose_random",
+        "bun_creatinine_ratio"
+      ],
+      "n_features": 25,
+      "cv_auc_mean": 0.8270415592521296,
+      "cv_auc_std": 0.004229553275117632,
+      "cv_fold_aucs": [
+        0.822040693271505,
+        0.8282489474949842,
+        0.8247743350285872,
+        0.8333570036021846,
+        0.826786816863387
+      ],
+      "oof_auc": 0.8269779055096916,
+      "threshold": {
+        "threshold": 0.5461330134918629,
+        "sensitivity": 0.6768534238822863,
+        "specificity": 0.8575885553399536,
+        "youden_j": 0.5344419792222399
+      },
+      "n_train": 31584,
+      "train_prevalence": 0.16783814589665655,
+      "estimator_path": "data/external/nhanes/models/model_A_full.joblib"
+    },
+    "model_B_full": {
+      "family": "hgb",
+      "params": {
+        "learning_rate": 0.05,
+        "max_depth": 6,
+        "max_iter": 100
+      },
+      "features": [
+        "serum_creatinine",
+        "bun",
+        "blood_glucose_random",
+        "sodium",
+        "potassium",
+        "chloride",
+        "bicarbonate",
+        "serum_albumin",
+        "uric_acid",
+        "calcium",
+        "phosphorus",
+        "hemoglobin",
+        "packed_cell_volume",
+        "red_blood_cell_count",
+        "white_blood_cell_count",
+        "platelets",
+        "hba1c",
+        "age",
+        "sex_male",
+        "sbp",
+        "blood_pressure",
+        "bmi",
+        "diabetes_mellitus",
+        "egfr_cr",
+        "bun_creatinine_ratio"
+      ],
+      "log_features": [
+        "serum_creatinine",
+        "bun",
+        "blood_glucose_random",
+        "bun_creatinine_ratio"
+      ],
+      "n_features": 25,
+      "cv_auc_mean": 0.8640541567635273,
+      "cv_auc_std": 0.007582104791641847,
+      "cv_fold_aucs": [
+        0.8631980360417915,
+        0.8736724798202575,
+        0.8533798600966905,
+        0.8682459039675675,
+        0.8617745038913299
+      ],
+      "oof_auc": 0.8638751195817947,
+      "threshold": {
+        "threshold": 0.14012365329249704,
+        "sensitivity": 0.7266553480475382,
+        "specificity": 0.8487996043069665,
+        "youden_j": 0.5754549523545047
+      },
+      "n_train": 31584,
+      "train_prevalence": 0.16783814589665655,
+      "estimator_path": "data/external/nhanes/models/model_B_full.joblib"
+    },
+    "baseline_egfr": {
+      "family": "logistic",
+      "params": {
+        "C": 0.001
+      },
+      "features": [
+        "egfr_cr"
+      ],
+      "log_features": [],
+      "n_features": 1,
+      "cv_auc_mean": 0.7604950087052792,
+      "cv_auc_std": 0.007071714585703939,
+      "cv_fold_aucs": [
+        0.7643258225331185,
+        0.7573069689650098,
+        0.7585195480599094,
+        0.7703919366153238,
+        0.7519307673530341
+      ],
+      "oof_auc": 0.7604498610286338,
+      "threshold": {
+        "threshold": 0.6603478197709584,
+        "sensitivity": 0.5036785512167515,
+        "specificity": 0.9475326256515618,
+        "youden_j": 0.45121117686831336
+      },
+      "n_train": 31584,
+      "train_prevalence": 0.16783814589665655,
+      "estimator_path": "data/external/nhanes/models/baseline_egfr.joblib"
+    },
+    "baseline_demographic": {
+      "family": "logistic",
+      "params": {
+        "C": 10.0
+      },
+      "features": [
+        "age",
+        "sex_male",
+        "diabetes_mellitus",
+        "sbp",
+        "blood_pressure"
+      ],
+      "log_features": [],
+      "n_features": 5,
+      "cv_auc_mean": 0.7729764409972634,
+      "cv_auc_std": 0.007872570938732901,
+      "cv_fold_aucs": [
+        0.7731424587522118,
+        0.7790046335344429,
+        0.77516339400117,
+        0.7780497168892389,
+        0.7595220018092531
+      ],
+      "oof_auc": 0.7727486763920031,
+      "threshold": {
+        "threshold": 0.5336045560023831,
+        "sensitivity": 0.6819468024900962,
+        "specificity": 0.7583228702963893,
+        "youden_j": 0.44026967278648554
+      },
+      "n_train": 31584,
+      "train_prevalence": 0.16783814589665655,
+      "estimator_path": "data/external/nhanes/models/baseline_demographic.joblib"
+    },
+    "model_A_harmonized": {
+      "family": "logistic",
+      "params": {
+        "C": 1.0
+      },
+      "features": [
+        "age",
+        "blood_pressure",
+        "blood_glucose_random",
+        "bun",
+        "serum_creatinine",
+        "egfr_cr",
+        "bun_creatinine_ratio",
+        "sodium",
+        "potassium",
+        "hemoglobin",
+        "packed_cell_volume",
+        "white_blood_cell_count",
+        "red_blood_cell_count",
+        "diabetes_mellitus"
+      ],
+      "log_features": [
+        "serum_creatinine",
+        "bun",
+        "blood_glucose_random",
+        "bun_creatinine_ratio"
+      ],
+      "n_features": 14,
+      "cv_auc_mean": 0.8096434548605543,
+      "cv_auc_std": 0.009251460570536855,
+      "cv_fold_aucs": [
+        0.8091516791627336,
+        0.8121507352281415,
+        0.8004394858966123,
+        0.8238508801753608,
+        0.8026244938399242
+      ],
+      "oof_auc": 0.8095398192312496,
+      "threshold": {
+        "threshold": 0.5882546192111258,
+        "sensitivity": 0.6362950386719487,
+        "specificity": 0.8795419092188868,
+        "youden_j": 0.5158369478908355
+      },
+      "n_train": 31584,
+      "train_prevalence": 0.16783814589665655,
+      "estimator_path": "data/external/nhanes/models/model_A_harmonized.joblib"
+    }
+  }
+}
