@@ -62,6 +62,10 @@ def build_estimator(family: str, params: Dict[str, object]) -> BaseEstimator:
         return make_logistic(float(params["C"]))
     if family == "hgb":
         return make_hgb(float(params["learning_rate"]), int(params["max_depth"]), int(params["max_iter"]))
+    if family in ("transfer_logistic", "transfer_logistic_noclip"):
+        from src.nhanes.transfer import make_transfer_logistic  # v3 (see src/nhanes/transfer.py)
+
+        return make_transfer_logistic(float(params["C"]), clip=(family == "transfer_logistic"))
     raise ValueError(f"unknown model family: {family}")
 
 
@@ -121,9 +125,9 @@ def cv_auc(
 
 def tune_logistic(
     model_set: str, X: pd.DataFrame, y: np.ndarray, cv: StratifiedKFold,
-    c_grid: Sequence[float] = LOGISTIC_C_GRID,
+    c_grid: Sequence[float] = LOGISTIC_C_GRID, family: str = "logistic",
 ) -> List[CVResult]:
-    return [cv_auc(model_set, "logistic", {"C": float(C)}, X, y, cv) for C in c_grid]
+    return [cv_auc(model_set, family, {"C": float(C)}, X, y, cv) for C in c_grid]
 
 
 def tune_hgb(

@@ -258,6 +258,40 @@ def fig06_permutation_importance(pi: pd.DataFrame, final: str) -> None:
     _save(fig, "fig06_permutation_importance.png")
 
 
+# -- Figure 7: ROC on UCI, v2 first look vs v3 second look ----------------------
+def fig07_roc_uci_v3(uci_preds_v2: pd.DataFrame, ext_v2: dict, uci_preds_v3: pd.DataFrame, ext_v3: dict) -> None:
+    y = uci_preds_v2["ckd"].to_numpy().astype(int)
+    fig, ax = plt.subplots(figsize=(6.8, 6.8))
+    fpr, tpr, _ = roc_curve(y, uci_preds_v2["prob_egfr_male"].to_numpy())
+    ax.plot(fpr, tpr, color=TEXT_DIM, linewidth=1.6, linestyle="-.",
+            label=f"v2 harmonised logistic, first look\n   {_auc_label(ext_v2['by_sex_assumption']['male']['roc_auc'])}")
+    styles = {"transfer_hgb_14": ("v3 gradient boosting, 14 features", NEON_BLUE),
+              "transfer_lr_v3": ("v3 logistic, no indicators + clipping", NEON_PINK),
+              "transfer_lr_v3_noclip": ("ablation: no indicators, no clipping", NEON_YELLOW)}
+    final = ext_v3["final_model"]
+    for name in [final] + [n for n in styles if n != final]:
+        if f"prob_{name}" not in uci_preds_v3.columns:
+            continue
+        label, color = styles[name]
+        fpr, tpr, _ = roc_curve(y, uci_preds_v3[f"prob_{name}"].to_numpy())
+        block = ext_v3["models"][name]["uci"]["male"]["roc_auc"]
+        ax.plot(fpr, tpr, color=color, linewidth=2.8 if name == final else 1.6,
+                label=f"{label}{' (FINAL v3)' if name == final else ''}\n   {_auc_label(block)}")
+        if name == final:
+            ax.fill_between(fpr, tpr, alpha=0.1, color=color)
+    ax.plot([0, 1], [0, 1], color=TEXT_DIM, linestyle="--", linewidth=1, label="Random (AUC 0.500)")
+    ax.set_xlabel("False positive rate (1 - specificity)")
+    ax.set_ylabel("True positive rate (sensitivity)")
+    ax.set_title(f"Figure 7. UCI hospital patients (n = {ext_v3['n_uci']}): v3 transfer models\n"
+                 "(selected by NHANES CV only; disclosed second look at UCI)", color=TEXT_WHITE, fontsize=10.5)
+    ax.set_xlim(-0.01, 1.01)
+    ax.set_ylim(-0.01, 1.01)
+    ax.set_aspect("equal")
+    ax.legend(loc="lower right", fontsize=8)
+    plt.tight_layout()
+    _save(fig, "fig07_roc_uci_v3.png")
+
+
 def main() -> None:
     print("Ren AI v2 - NHANES figures (dark theme)")
     summary = json.loads((REPORTS_DIR / "cohort_summary.json").read_text())
@@ -274,6 +308,11 @@ def main() -> None:
     fig04_calibration(metrics)
     fig05_odds_ratios(coef)
     fig06_permutation_importance(pi, metrics["final_model"])
+    v3_path = REPORTS_DIR / "external_metrics_v3.json"
+    if v3_path.exists():
+        ext_v3 = json.loads(v3_path.read_text())
+        uci_preds_v3 = pd.read_csv(REPORTS_DIR / "uci_predictions_v3.csv")
+        fig07_roc_uci_v3(uci_preds, ext, uci_preds_v3, ext_v3)
     print(f"all figures saved to {FIGURES_DIR.relative_to(REPO)}")
 
 

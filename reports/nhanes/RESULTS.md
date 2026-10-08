@@ -15,7 +15,8 @@ was frozen and written down (`run_log.md`, "Decision record").
 | Final model | gradient boosting (Model B), 25 features | chosen by mean 5-fold CV ROC-AUC on train before the test set was touched |
 | **Held-out ROC-AUC** | **0.856 [0.844, 0.868]** | probability that a random CKD participant scores higher than a random non-CKD participant |
 | **Early-subgroup ROC-AUC** (eGFR >= 60) | **0.751 [0.733, 0.768]** | same, restricted to the 7,420 test participants whose CKD can only be albuminuria (KDIGO G1-G2 A2-A3) |
-| **External ROC-AUC**, 399 UCI hospital patients | **0.641 [0.587, 0.701]** | UCI-compatible logistic model (14 shared features) trained on NHANES only, applied unchanged |
+| **External ROC-AUC**, 399 UCI hospital patients, first look (v2) | **0.641 [0.587, 0.701]** | UCI-compatible logistic model (14 shared features) trained on NHANES only, applied unchanged |
+| **External ROC-AUC**, same 399 patients, second look (v3, disclosed) | **0.950 [0.931, 0.967]** | gradient-boosting transfer model on the same 14 features after a pre-specified fix of the diagnosed preprocessing flaw; selected by NHANES CV only (Section 8b) |
 | Blood tests / engineered scores used | 17 / 2 | analytes from serum chemistry, CBC and HbA1c; eGFR (CKD-EPI 2021) and BUN:creatinine ratio |
 
 95% CIs are percentile bootstraps (1,000 resamples, seed 42).
@@ -183,6 +184,46 @@ rare-missingness indicators), not a failure of the blood tests. The fix (drop or
 indicators with < 1% missingness, or regularise harder) is a v3 change and is deliberately NOT
 applied here, because it was discovered after seeing the external result.
 
+### 8b. v3 transfer model: pre-specified fix, disclosed second look at UCI
+
+After the diagnosis in 8a, and at the user's request to improve the transfer, a v3 transfer
+model was pre-specified in `run_log.md` ("v3 transfer model: pre-specification") before UCI
+was evaluated again:
+
+1. no missing-value indicators (site-specific missingness does not transfer);
+2. features clipped to the NHANES-train 0.1-99.9 percentile range before scaling (no
+   extrapolation on hospital-range values; `src/nhanes/transfer.py::RangeClipper`);
+3. a gradient-boosting candidate on the same 14 shared features (trees do not extrapolate and
+   handle missing values natively).
+
+Candidates were tuned and selected by 5-fold CV on NHANES train only (`cv_results_v3.csv`,
+`frozen_config_v3.json`); UCI played no part in selection. Gradient boosting won (CV AUC
+0.851 vs 0.810 for the v3 logistic). UCI was then evaluated exactly once more
+(`scripts/nhanes_11_transfer_v3_evaluate.py`, `external_metrics_v3.json`, Figure 7).
+
+| model (14 shared features) | role | NHANES CV AUC | **UCI AUC [95% CI]**, eGFR as male | UCI AUC, female | sens | spec | PPV | NPV | Brier | NHANES test AUC (context) |
+|---|---|---:|---|---:|---:|---:|---:|---:|---:|---|
+| v2 harmonised logistic | first look (8) | 0.810 | 0.641 [0.587, 0.701] | 0.642 | 0.636 | 0.866 | 0.888 | 0.586 | 0.282 | 0.811 [0.796, 0.824] |
+| **v3 gradient boosting** | **final v3** | 0.851 | **0.950 [0.931, 0.967]** | 0.925 | 0.912 | 0.772 | 0.870 | 0.839 | 0.100 | 0.850 [0.837, 0.862] |
+| v3 logistic, no indicators + clipping | secondary | 0.810 | 0.933 [0.906, 0.958] | 0.931 | 0.884 | 0.893 | 0.932 | 0.821 | 0.098 | 0.810 [0.795, 0.823] |
+| ablation: no indicators, no clipping | ablation | 0.810 | 0.928 [0.897, 0.955] | 0.926 | 0.884 | 0.893 | 0.932 | 0.821 | 0.103 | 0.811 [0.796, 0.824] |
+
+Sensitivity/specificity/PPV/NPV are at each model's NHANES-train Youden threshold. Mechanism
+check for the final v3 model: the 88 UCI patients missing potassium or sodium now score AUC
+0.860 [0.742, 0.968] (v2: 0.586); complete cases 0.985 [0.968, 0.997]; potassium and sodium
+observed 0.972 [0.953, 0.985]. Removing the indicators accounts for almost all of the gain
+(ablation 0.928); clipping adds little for the logistic model; the tree model adds the rest.
+
+Plain English, final v3 model: on the 399 hospital patients it ranks a CKD patient above a
+non-CKD patient 95% of the time, catches 91% of CKD patients and clears 77% of non-CKD patients
+at the threshold chosen on NHANES. The NHANES-side numbers of the transfer models were also
+scored on the 2017-2020 cycle for context (a second look at that cycle too); no NHANES-level
+decision depends on them, and the v2 headline (Section 7) is unchanged.
+
+How to quote this honestly: "first external look 0.64; after a pre-specified fix of a diagnosed
+preprocessing flaw, 0.95 on the same 399 patients (second look)". The 0.95 may not be presented
+as if it were the first and only external test.
+
 ## 9. Figures (`reports/nhanes/figures/`)
 
 1. `fig01_cohort_flow.png` cohort flow and temporal split
@@ -191,6 +232,7 @@ applied here, because it was discovered after seeing the external result.
 4. `fig04_calibration_nhanes_test.png` calibration of Model B and Model A on the held-out cycle
 5. `fig05_model_a_odds_ratios.png` Model A odds ratios, top 15 by |log-odds|
 6. `fig06_permutation_importance.png` permutation importance of the final model, top 15
+7. `fig07_roc_uci_v3.png` ROC on the 399 UCI patients: v2 first look vs the v3 transfer models
 
 ## 10. Limitations
 
@@ -214,6 +256,10 @@ applied here, because it was discovered after seeing the external result.
   collinear, so Model A's individual odds ratios for those three terms (Figure 5) are not
   interpretable on their own; only their sum is.
 * **Hypertension** could not be used for the external test (not in the NHANES files downloaded).
+* **Second look at UCI.** The v3 transfer result (0.950) was obtained after the external set had
+  already been evaluated once and diagnosed. The fix was pre-specified and the model was selected by
+  NHANES CV only, but the choice of *which* mechanism to fix was informed by the first UCI result.
+  Both numbers are reported; neither the 0.95 nor the 0.64 should be quoted without the other.
 * Implausible values flagged by the repo's hard ranges (283 in the cohort, mostly diastolic
   readings < 30 mmHg) were kept, matching v1 behaviour.
 
@@ -230,6 +276,10 @@ bash scripts/download_nhanes.sh
 .venv/bin/python scripts/nhanes_07_external_uci.py
 .venv/bin/python scripts/nhanes_08_figures.py
 .venv/bin/python scripts/nhanes_09_uci_diagnostics.py  # post-hoc, exploratory
+.venv/bin/python scripts/nhanes_10_transfer_v3_train.py     # v3: pre-specify + tune on NHANES train
+.venv/bin/python scripts/nhanes_11_transfer_v3_evaluate.py  # v3: the disclosed second look at UCI
+.venv/bin/python scripts/nhanes_08_figures.py               # adds fig07
+.venv/bin/python scripts/nhanes_12_claims.py                # regenerates CLAIMS.md
 .venv/bin/python -m pytest -q
 ```
 
@@ -237,4 +287,5 @@ Outputs: `baseline_uci.txt`, `raw_file_manifest.md`, `harmonization_report.md`,
 `cohort_flow.md`, `cohort_summary.json`, `cv_results.csv`, `frozen_config.json`,
 `model_A_coefficients.csv`, `test_metrics.json`, `test_predictions.csv`,
 `permutation_importance.csv`, `external_metrics.json`, `uci_predictions.csv`,
-`external_diagnostics.json`, `run_log.md`, `CLAIMS.md`, `figures/`.
+`external_diagnostics.json`, `cv_results_v3.csv`, `frozen_config_v3.json`, `external_metrics_v3.json`,
+`uci_predictions_v3.csv`, `run_log.md`, `CLAIMS.md`, `figures/`.

@@ -72,3 +72,50 @@ Frozen model_A_harmonized applied unchanged to the 399 UCI patients (eGFR as mal
 
 Exploratory, not pre-registered, nothing retrained: the frozen harmonised Model A applied to UCI subsets to explain the external result. See reports/nhanes/external_diagnostics.json.
 
+## v3 transfer model: pre-specification (written before the second look at UCI)
+
+- Disclosure: UCI has been evaluated once (v2 harmonised Model A, AUC 0.641, see external_metrics.json).
+  The post-hoc diagnosis (external_diagnostics.json) found two mechanisms: standardised rare-missingness
+  indicators (-55 log-odds for a missing potassium) and extrapolation on hospital-range values (z up to 26).
+- v3 changes, fixed now: (1) no missing-value indicators; (2) features clipped to the NHANES-train
+  0.1%-99.9% range before scaling; (3) a gradient-boosting candidate on
+  the same 14 shared features. Same 14 features, same log policy, same label, same NHANES train rows.
+- Selection rule: highest mean 5-fold CV ROC-AUC on NHANES train among ['transfer_lr_v3', 'transfer_hgb_14'].
+  UCI plays no part in selection. `transfer_lr_v3_noclip` (no indicators, no clipping) is an ablation, reported only.
+- Thresholds: Youden's J on NHANES-train out-of-fold predictions.
+- UCI is then evaluated exactly once more by scripts/nhanes_11_transfer_v3_evaluate.py; whatever the
+  number is, it is reported next to the v2 number as a disclosed second look.
+
+## v3 training run 2026-10-08T08:32:18+00:00 - scripts/nhanes_10_transfer_v3_train.py
+
+| model_set | family | params | fold AUCs | mean AUC | sd |
+|---|---|---|---|---:|---:|
+| transfer_lr_v3 | transfer_logistic | C=0.001 | 0.7997, 0.7980, 0.7939, 0.8144, 0.7900 | 0.7992 | 0.0093 |
+| transfer_lr_v3 | transfer_logistic | C=0.01 | 0.8022, 0.8013, 0.7963, 0.8178, 0.7934 | 0.8022 | 0.0095 |
+| transfer_lr_v3 | transfer_logistic | C=0.1 | 0.8071, 0.8087, 0.8001, 0.8231, 0.7994 | 0.8077 | 0.0096 |
+| transfer_lr_v3 | transfer_logistic | C=1.0 | 0.8087, 0.8125, 0.8002, 0.8243, 0.8026 | 0.8097 | 0.0095 |
+| transfer_lr_v3 | transfer_logistic | C=10.0 | 0.8084, 0.8130, 0.7998, 0.8241, 0.8030 | 0.8097 | 0.0095 |
+| transfer_lr_v3_noclip | transfer_logistic_noclip | C=0.001 | 0.7996, 0.7980, 0.7936, 0.8144, 0.7896 | 0.7990 | 0.0094 |
+| transfer_lr_v3_noclip | transfer_logistic_noclip | C=0.01 | 0.8022, 0.8014, 0.7961, 0.8178, 0.7930 | 0.8021 | 0.0096 |
+| transfer_lr_v3_noclip | transfer_logistic_noclip | C=0.1 | 0.8074, 0.8092, 0.8001, 0.8230, 0.7993 | 0.8078 | 0.0095 |
+| transfer_lr_v3_noclip | transfer_logistic_noclip | C=1.0 | 0.8091, 0.8131, 0.8005, 0.8239, 0.8026 | 0.8098 | 0.0093 |
+| transfer_lr_v3_noclip | transfer_logistic_noclip | C=10.0 | 0.8089, 0.8134, 0.8001, 0.8236, 0.8029 | 0.8098 | 0.0093 |
+| transfer_hgb_14 | hgb | learning_rate=0.05, max_depth=3, max_iter=100 | 0.8504, 0.8529, 0.8376, 0.8516, 0.8444 | 0.8474 | 0.0064 |
+| transfer_hgb_14 | hgb | learning_rate=0.05, max_depth=3, max_iter=300 | 0.8571, 0.8542, 0.8407, 0.8553, 0.8492 | 0.8513 | 0.0066 |
+| transfer_hgb_14 | hgb | learning_rate=0.05, max_depth=6, max_iter=100 | 0.8554, 0.8547, 0.8411, 0.8537, 0.8479 | 0.8506 | 0.0061 |
+| transfer_hgb_14 | hgb | learning_rate=0.05, max_depth=6, max_iter=300 | 0.8538, 0.8459, 0.8331, 0.8504, 0.8423 | 0.8451 | 0.0080 |
+| transfer_hgb_14 | hgb | learning_rate=0.1, max_depth=3, max_iter=100 | 0.8553, 0.8549, 0.8410, 0.8542, 0.8483 | 0.8508 | 0.0061 |
+| transfer_hgb_14 | hgb | learning_rate=0.1, max_depth=3, max_iter=300 | 0.8583, 0.8495, 0.8393, 0.8536, 0.8474 | 0.8496 | 0.0071 |
+| transfer_hgb_14 | hgb | learning_rate=0.1, max_depth=6, max_iter=100 | 0.8537, 0.8511, 0.8373, 0.8520, 0.8456 | 0.8480 | 0.0067 |
+| transfer_hgb_14 | hgb | learning_rate=0.1, max_depth=6, max_iter=300 | 0.8428, 0.8382, 0.8245, 0.8433, 0.8313 | 0.8360 | 0.0080 |
+
+- **transfer_lr_v3** (secondary candidate): transfer_logistic {'C': 1.0} -> CV AUC 0.8097; threshold 0.5812 (OOF sens 0.642, spec 0.873)
+- **transfer_hgb_14** (final): hgb {'learning_rate': 0.05, 'max_depth': 3, 'max_iter': 300} -> CV AUC 0.8513; threshold 0.1612 (OOF sens 0.681, spec 0.874)
+- **transfer_lr_v3_noclip** (ablation): transfer_logistic_noclip {'C': 1.0} -> CV AUC 0.8098; threshold 0.5862 (OOF sens 0.637, spec 0.878)
+
+**FINAL v3 transfer model: transfer_hgb_14** (frozen before the second UCI evaluation).
+
+## v3 external evaluation 2026-10-08T08:33:03+00:00 - scripts/nhanes_11_transfer_v3_evaluate.py
+
+Second, disclosed look at UCI with the models frozen at 2026-10-08T08:32:18+00:00. Results in external_metrics_v3.json; v2 first-look AUC 0.641 stays on record.
+

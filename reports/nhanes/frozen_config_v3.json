@@ -1,0 +1,164 @@
+{
+  "created_utc": "2026-10-08T08:32:18+00:00",
+  "version": "v3 transfer model (second look at UCI, disclosed)",
+  "seed": 42,
+  "sklearn_version": "1.8.0",
+  "cv": "StratifiedKFold(n_splits=5, shuffle=True, random_state=42) on NHANES train only",
+  "selection_rule": "highest mean CV ROC-AUC among ['transfer_lr_v3', 'transfer_hgb_14']; UCI not used",
+  "final_model": "transfer_hgb_14",
+  "clip_quantiles": [
+    0.001,
+    0.999
+  ],
+  "models": {
+    "transfer_lr_v3": {
+      "family": "transfer_logistic",
+      "params": {
+        "C": 1.0
+      },
+      "features": [
+        "age",
+        "blood_pressure",
+        "blood_glucose_random",
+        "bun",
+        "serum_creatinine",
+        "egfr_cr",
+        "bun_creatinine_ratio",
+        "sodium",
+        "potassium",
+        "hemoglobin",
+        "packed_cell_volume",
+        "white_blood_cell_count",
+        "red_blood_cell_count",
+        "diabetes_mellitus"
+      ],
+      "log_features": [
+        "serum_creatinine",
+        "bun",
+        "blood_glucose_random",
+        "bun_creatinine_ratio"
+      ],
+      "n_features": 14,
+      "cv_auc_mean": 0.8096694446783601,
+      "cv_auc_std": 0.00951618571083201,
+      "cv_fold_aucs": [
+        0.8087003492199081,
+        0.812546792955305,
+        0.80022557524379,
+        0.8242869869469226,
+        0.8025875190258751
+      ],
+      "oof_auc": 0.8095803715515554,
+      "threshold": {
+        "threshold": 0.5811730851647467,
+        "sensitivity": 0.6419543482361818,
+        "specificity": 0.8725411863181525,
+        "youden_j": 0.5144955345543343
+      },
+      "n_train": 31584,
+      "train_prevalence": 0.16783814589665655,
+      "estimator_path": "data/external/nhanes/models/transfer_lr_v3.joblib",
+      "role": "secondary candidate"
+    },
+    "transfer_hgb_14": {
+      "family": "hgb",
+      "params": {
+        "learning_rate": 0.05,
+        "max_depth": 3,
+        "max_iter": 300
+      },
+      "features": [
+        "age",
+        "blood_pressure",
+        "blood_glucose_random",
+        "bun",
+        "serum_creatinine",
+        "egfr_cr",
+        "bun_creatinine_ratio",
+        "sodium",
+        "potassium",
+        "hemoglobin",
+        "packed_cell_volume",
+        "white_blood_cell_count",
+        "red_blood_cell_count",
+        "diabetes_mellitus"
+      ],
+      "log_features": [
+        "serum_creatinine",
+        "bun",
+        "blood_glucose_random",
+        "bun_creatinine_ratio"
+      ],
+      "n_features": 14,
+      "cv_auc_mean": 0.8513004140453801,
+      "cv_auc_std": 0.006616891597185349,
+      "cv_fold_aucs": [
+        0.8571358583882766,
+        0.8541962917368037,
+        0.84071265267155,
+        0.8553003290884651,
+        0.8491569383418052
+      ],
+      "oof_auc": 0.851132532641047,
+      "threshold": {
+        "threshold": 0.16115146966725571,
+        "sensitivity": 0.6813808715336729,
+        "specificity": 0.8743674618574744,
+        "youden_j": 0.5557483333911473
+      },
+      "n_train": 31584,
+      "train_prevalence": 0.16783814589665655,
+      "estimator_path": "data/external/nhanes/models/transfer_hgb_14.joblib",
+      "role": "final"
+    },
+    "transfer_lr_v3_noclip": {
+      "family": "transfer_logistic_noclip",
+      "params": {
+        "C": 1.0
+      },
+      "features": [
+        "age",
+        "blood_pressure",
+        "blood_glucose_random",
+        "bun",
+        "serum_creatinine",
+        "egfr_cr",
+        "bun_creatinine_ratio",
+        "sodium",
+        "potassium",
+        "hemoglobin",
+        "packed_cell_volume",
+        "white_blood_cell_count",
+        "red_blood_cell_count",
+        "diabetes_mellitus"
+      ],
+      "log_features": [
+        "serum_creatinine",
+        "bun",
+        "blood_glucose_random",
+        "bun_creatinine_ratio"
+      ],
+      "n_features": 14,
+      "cv_auc_mean": 0.8098243010084376,
+      "cv_auc_std": 0.009342248113348123,
+      "cv_fold_aucs": [
+        0.8090825888931559,
+        0.8130819284978519,
+        0.8004750180352522,
+        0.8238991173141561,
+        0.802582852301772
+      ],
+      "oof_auc": 0.809732037229499,
+      "threshold": {
+        "threshold": 0.5861861825498772,
+        "sensitivity": 0.6374269005847953,
+        "specificity": 0.8783243921926721,
+        "youden_j": 0.5157512927774675
+      },
+      "n_train": 31584,
+      "train_prevalence": 0.16783814589665655,
+      "estimator_path": "data/external/nhanes/models/transfer_lr_v3_noclip.joblib",
+      "role": "ablation"
+    }
+  }
+}
