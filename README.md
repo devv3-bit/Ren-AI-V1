@@ -1,6 +1,8 @@
 # Ren-AI-V1
 ML pipeline for early Chronic Kidney Disease detection using clinical lab biomarkers — featuring eGFR derivation, two-stage feature contracts, and interpretable logistic regression with cross-validated AUC reporting.
 
+Project portfolio (journey, analysis, figures): [PORTFOLIO.md](PORTFOLIO.md).
+
 ## v2: NHANES (branch `nhanes-v2`)
 
 v2 re-trains the pipeline on **39,622 US adults** from seven public CDC NHANES cycles

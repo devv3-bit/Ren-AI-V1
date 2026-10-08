@@ -35,3 +35,6 @@ data/external/
 
 # Keep the v2 NHANES reports despite the global *.md rule above
 !reports/nhanes/**/*.md
+
+# Portfolio document (kept despite the global *.md rule)
+!PORTFOLIO.md
